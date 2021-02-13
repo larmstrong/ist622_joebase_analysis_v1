@@ -113,6 +113,7 @@ prices = fig_data[fig_data['year'] > 0]["price"].copy()
 prices.dropna(inplace=True)
 
 # Get the descriptive statistics for prices.
+print('\nTHE PRICE ATTRIBUTE HAS THE FOLLOWING STATISTCS:')
 print(prices.describe())
 
 # Graph price distribution as a boxplot.
@@ -156,7 +157,11 @@ figs_with_prices = fig_data[(~fig_data["price"].isna()) & (fig_data["year"] > 0)
 year_gb = figs_with_prices.groupby(by="year", axis=0)
 
 # Get and print the inter-quartile ranges for each year.
-print(year_gb.quantile(q=0.75)['price']-year_gb.quantile(q=0.25)['price'])
+iqr = (year_gb.quantile(q=0.75)['price']-year_gb.quantile(q=0.25)['price']).reset_index()
+iqr.columns = ('Year', 'Price IQR')
+print('\nTHE INTERQUARTILE RANGES FOR PRICE ARE:')
+print(iqr)
+iqr.to_csv('price_iqr.csv')
 
 # Get the number of figures aquired from each production year.
 num_aquired = year_gb.aggregate(len)["figure_id"]
@@ -191,6 +196,8 @@ g = (
 g.draw()
 plt.show()
 
+# Sve figs_with_prices
+figs_with_prices.to_csv('figs_with_prices.csv')
 
 # %% ---------------------------------------------------------------------------
 # QUESTION 2: HOW DID GENRE COLLECTING CHANGE OVER THE YEARS?
@@ -249,6 +256,9 @@ g = (gg.ggplot(data=genre_df)
 	+ gg.scale_y_continuous(labels=percent_format()))
 g.draw()
 plt.show()
+
+# Save genre_df
+genre_df.to_csv('genre_df.csv')
 
 
 # %% ---------------------------------------------------------------------------
