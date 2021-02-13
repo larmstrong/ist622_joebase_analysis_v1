@@ -6,6 +6,7 @@
 #    Problem: Performe data exploration and cleaning on a structured data set.
 #             The Joebase action figure database is analyzed.
 
+
 # %% LOAD LIBRARIES ------------------------------------------------------------
 
 # Partial library imports
@@ -51,6 +52,14 @@ GENRES = {
 # Value to use when a year value is unknown
 UNKNOWN_YEAR = 0
 
+# Define a high-contrast color palette to assist those of us who are colorblind
+# The palette is a subset of the colors defined in a palette published in
+# https://jxnblk.com/blog/color-palette-documentation-for-living-style-guides/
+MY_COLORS = [
+	'#0074D9', '#2ECC40', '#FFDC00', '#FF4136', '#AAAAAA',
+	'#DDDDDD', '#7FDBFF', '#39CCCC', '#3D9970', '#01ff70', '#FF851B' ]
+
+
 # %% READ DATA -----------------------------------------------------------------
 
 # Create a proper file path.
@@ -87,7 +96,7 @@ half_decade = fig_data["year"] - fig_data["year"].mod(5)
 fig_data["Half Decade"] = [str(x) for x in half_decade]
 
 
-# %% PROVIDE BASIC DATA INFORMATION --------------------------------------------
+# %% PROVIDE BASIC DATA SUMMARIES ----------------------------------------------
 
 data_shape = fig_data.shape
 print(f'\nTHE CLEANSED DATA SET CONTAINS {data_shape[0]} ROWS AND {data_shape[1]} COLUMNS.')
@@ -136,6 +145,7 @@ ax.set_ylabel('Volume of Figures')							# Title the y-axis
 plt.show()
 mpl.rcParams.update(mpl.rcParamsDefault)
 
+
 # %% ---------------------------------------------------------------------------
 # QUESTION 1: WHAT IS THE AVERAGE FIGURE PRICE PAID PER YEAR?
 
@@ -181,6 +191,7 @@ g = (
 g.draw()
 plt.show()
 
+
 # %% ---------------------------------------------------------------------------
 # QUESTION 2: HOW DID GENRE COLLECTING CHANGE OVER THE YEARS?
 
@@ -189,13 +200,6 @@ genre_volumes = pd.DataFrame(
 	[ { "Genre" : g, "Volume" : sum(fig_data[g]) } for g in GENRES ] )
 genre_volumes.sort_values('Volume', ascending=False, inplace=True)
 print(genre_volumes)
-
-# Define a high-contrast color palette to assist those of us who are colorblind
-# The palette is a subset of the colors defined in a palette published in
-# https://jxnblk.com/blog/color-palette-documentation-for-living-style-guides/
-my_colors = [
-	'#0074D9', '#2ECC40', '#FFDC00', '#FF4136', '#AAAAAA',
-	'#DDDDDD', '#7FDBFF', '#39CCCC', '#3D9970', '#01ff70', '#FF851B' ]
 
 # Set the figure's size and DPI.
 mpl.rcParams['figure.figsize'] = [12.0, 9.0]
@@ -206,7 +210,7 @@ fig, ax = plt.subplots()
 squarify.plot(
 	sizes=genre_volumes["Volume"],
 	label=genre_volumes['Genre'][:24], 
-	color=my_colors, alpha=0.7, ax=ax)
+	color=MY_COLORS, alpha=0.7, ax=ax)
 fig.suptitle('Tree Map of the Volume of Action Figures Within Genres',
 	fontsize='x-large', fontweight='bold')
 ax.set_title('Note: An action figure may be in more than one genre.')
@@ -241,10 +245,11 @@ g = (gg.ggplot(data=genre_df)
 		position=gg.position_fill())
 	+ gg.ggtitle('Relative Percentages of Top Six Genres Over Time')
 	+ gg.ylab('Relative Percent Across These Genres')
-	+ gg.scale_fill_manual(values=my_colors)
+	+ gg.scale_fill_manual(values=MY_COLORS)
 	+ gg.scale_y_continuous(labels=percent_format()))
 g.draw()
 plt.show()
+
 
 # %% ---------------------------------------------------------------------------
 
