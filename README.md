@@ -13,13 +13,11 @@ Preliminary exploratory analysis of the Joebase database c. Feb, 2021.
 | action_figures_b.csv | Raw action figure data, variant C. |
 | figs_with_prices.csv | Sample output data. | 
 | figure_price.png | ![Plot of average figure price over time](https://github.com/larmstrong/ist622_joebase_analysis_v1/blob/main/figure_price.png) |
-| figures_per_year.png
-genre_df.csv
-ist_622_hw01_armstrong.py
-percentcomp.png
-price_box.pdf
-price_iqr.csv
-priceranges.pdf
-priceranges.png
-proposal.docx
-treemap.png
+| figures_per_year.png | ![Plot of fgures collected per year](https://github.com/larmstrong/ist622_joebase_analysis_v1/blob/main/figures_per_year.png)
+| genre_df.csv | Output of genre dataframe for testing. |
+| ist_622_hw01_armstrong.py | Main python script for this analysis. | 
+| percentcomp.png | ![Chart showing shift in top 6 generes over time.](https://github.com/larmstrong/ist622_joebase_analysis_v1/blob/main/percentcomp.png)
+| price_iqr.csv | Interquartile range of prices. |
+| priceranges.png | 
+| proposal.docx | Project proposal |
+| treemap.png | ![Tree map of genres.](https://github.com/larmstrong/ist622_joebase_analysis_v1/blob/main/treemap.png)
